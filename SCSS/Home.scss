@@ -1,0 +1,286 @@
+:root {
+  /* ===== Website Variables | CSS Variables ===== */
+  --website-gradient: linear-gradient(45deg, #d719b6, #371ad2);
+  --background-hyperlink: url("./Images/Background.jpg");
+  --font-family-tilt-warp: "Tilt Warp", sans-serif;
+  --font-family-lato: "Lato", sans-serif;
+  --button-background-color: #1d112c;
+  --website-transition: all 0.2s ease;
+  --table-background-color: #141126;
+  --navigation-item-color: #cfcfcf;
+  --table-border-color: #1d1a2e;
+  --background-color: #0a071d;
+  --text-color-white: #fff;
+  --primary-color: #d719b6;
+  --border-color: #4b4b4b;
+}
+
+::-webkit-scrollbar {
+  /* ===== Scrollbar Hide | HTML ===== */
+  height: 0;
+  width: 0;
+}
+
+.body-container {
+  /* ===== Body Container | Background Settings ===== */
+  background-image: var(--background-hyperlink);
+  background-color: var(--background-color);
+  font-family: var(--font-family-lato);
+  background-repeat: no-repeat;
+  -ms-overflow-style: none;
+  background-size: contain;
+
+  .navigation-menu {
+    /* ===== Navigation Menu | Body Container ===== */
+    padding: 0px 150px 0px 150px;
+    margin: 30px 0px 0px 0px;
+
+    .navigation-start {
+      /* ===== Navigation Menu | Left ===== */
+      .website-brandmark {
+        height: 75px;
+      }
+    }
+
+    .navigation-center {
+      /* ===== Navigation Menu | Middle ===== */
+      .navigation-item {
+        transition: var(--website-transition);
+        color: var(--navigation-item-color);
+        padding: 0px 20px 0px 20px;
+
+        &:hover {
+          /* ===== Navigation Menu | Hover ===== */
+          color: var(--text-color-white);
+        }
+      }
+    }
+
+    .navigation-end {
+      /* ===== Navigation Menu | End ===== */
+      .navigation-color {
+        color: var(--navigation-item-color);
+      }
+
+      .explore-wallet-btn {
+        /* ===== Explore Wallet | Button ===== */
+        transition: var(--website-transition);
+        background: var(--website-gradient);
+        color: var(--text-color-white);
+        border-radius: 10px;
+        font-size: 16px;
+        height: 50px;
+        width: 160px;
+      }
+    }
+  }
+
+  .main-container {
+    /* ===== Main Container | CryptoChan ===== */
+    padding: 0px 150px 0px 150px;
+    height: 100vh;
+
+    .heading-container {
+      .heading-wrapping {
+        .header-one {
+          /* ===== Header #1 | Main Container ===== */
+          border-bottom: 2px solid var(--border-color);
+          font-family: var(--font-family-tilt-warp);
+          border-top: 2px solid var(--border-color);
+          color: var(--text-color-white);
+          padding: 10px 0px 10px 0px;
+          margin: 50px 0px 0px 0px;
+          font-size: 85px;
+          width: 753px;
+        }
+
+        .header-two {
+          /* ===== Header #2 | Main Container ===== */
+          font-family: var(--font-family-tilt-warp);
+          color: var(--text-color-white);
+          font-size: 75px;
+
+          .highlight {
+            /* ===== Header Highlight | Main Container ===== */
+            background: var(--website-gradient);
+            font-size: 125px;
+          }
+        }
+
+        .biograph {
+          /* ===== Biograph | Main Container ===== */
+          color: var(--text-color-white);
+          font-size: 18px;
+          opacity: 85%;
+        }
+      }
+    }
+
+    .heading-actions {
+      .explore-wallet-btn {
+        /* ===== Explore Wallet | Button ===== */
+        transition: var(--website-transition);
+        background: var(--website-gradient);
+        color: var(--text-color-white);
+        border-radius: 10px;
+        font-size: 16px;
+        height: 50px;
+        width: 160px;
+      }
+
+      .trade-btn {
+        /* ===== Trade | Button ===== */
+        background-color: var(--button-background-color);
+        border: 2px solid var(--primary-color);
+        transition: var(--website-transition);
+        color: var(--text-color-white);
+        border-radius: 10px;
+        font-size: 16px;
+        height: 50px;
+        width: 100px;
+      }
+    }
+  }
+
+  .main-currencies {
+    /* ===== Container | Main Currencies ===== */
+    padding: 0px 150px;
+    overflow: hidden;
+  }
+
+  .table-wrapper {
+    /* ===== Wrapper | Currency Table ===== */
+    background-color: var(--table-background-color);
+    border: 3px solid var(--table-border-color);
+    border-radius: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .currency-table {
+    /* ===== Table Settings | Currency Table ===== */
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  .curreny-table-header {
+    /* ===== Text Settings | Currency Table Header ===== */
+    color: var(--primary-color);
+    font-size: 12px;
+  }
+
+  .currency-table-header-item {
+    /* ===== Table Header | Currency Table Header ===== */
+    border-bottom: 3px solid var(--table-border-color);
+    background-color: var(--table-background-color);
+    position: sticky;
+    z-index: 1;
+    top: 0;
+  }
+
+  .currency-table-header-item span {
+    /* ===== Table Topic | Currency Table Header ===== */
+    -webkit-text-fill-color: transparent;
+    background: var(--website-gradient);
+    -webkit-background-clip: text;
+    display: inline-block;
+    color: transparent;
+  }
+
+  .currency-table-header-item i {
+    /* ===== Coin Images | Currency Table Body ===== */
+    color: var(--text-color-white);
+  }
+
+  .currency-table-body-item {
+    /* ===== Text Color | Currency Table Body ===== */
+    color: var(--navigation-item-color);
+    font-size: 11px;
+
+    .dollar {
+      /* ===== Dollar Color | Currency Table Body ===== */
+      color: greenyellow;
+    }
+  }
+
+  .currency-table tbody tr:nth-child(odd) {
+    /* ===== Table Row Background | Currency Table Body ===== */
+    background-color: #19172a;
+  }
+
+  .currency-table tbody tr:nth-child(even) {
+    /* ===== Table Row Background | Currency Table Body ===== */
+    background-color: #141126;
+  }
+
+  .symbol {
+    /* ===== Filter Symbol | Currency Table Header ===== */
+    color: var(--text-color-white);
+    opacity: 60%;
+  }
+
+  .modal-content {
+    background-color: var(--table-background-color);
+    border: 3px solid var(--table-border-color);
+    width: 1000px;
+
+    .modal-header {
+      border: none;
+
+      .currency-name {
+        color: var(--text-color-white);
+        font-size: 15px;
+      }
+
+      .currency-symbol {
+        color: var(--text-color-white);
+        font-size: 15px;
+        opacity: 60%;
+      }
+
+      .close-modal-btn {
+        color: var(--text-color-white);
+        font-size: 20px;
+      }
+    }
+
+    .modal-body {
+      .currency-detail {
+        background-color: var(--table-border-color);
+        border-radius: 10px;
+        width: 200px;
+
+        .detail-image {
+          background: var(--website-gradient);
+          height: 40px;
+          width: 40px;
+          color: var(--text-color-white);
+          border-radius: 5px;
+        }
+
+        .detail-info {
+          .info-type {
+            color: var(--text-color-white);
+            font-size: 13px;
+          }
+
+          .info-digits {
+            color: var(--text-color-white);
+            font-size: 12px;
+            opacity: 60%;
+          }
+
+          .dollar {
+            font-size: 11px;
+            color: greenyellow;
+          }
+        }
+      }
+
+      .large {
+        width: 100%;
+      }
+    }
+  }
+}

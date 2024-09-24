@@ -1,0 +1,149 @@
+:root {
+  /* ===== Website Variables | CSS Variables ===== */
+  --website-gradient: linear-gradient(45deg, #d719b6, #371ad2);
+  --background-hyperlink: url("./Images/Background.jpg");
+  --font-family-tilt-warp: "Tilt Warp", sans-serif;
+  --font-family-lato: "Lato", sans-serif;
+  --website-transition: all 0.2s ease;
+  --card-background-color: #141126;
+  --input-border-color: #211e33;
+  --card-border-color: #1d1a2e;
+  --text-color-white: #fff;
+}
+
+::-webkit-scrollbar {
+  /* ===== Scrollbar Hide | HTML ===== */
+  height: 0;
+  width: 0;
+}
+
+.body-container {
+  /* ===== Body Container | Background Settings ===== */
+  background-image: var(--background-hyperlink);
+  background-color: var(--background-color);
+  font-family: var(--font-family-lato);
+  background-repeat: no-repeat;
+  -ms-overflow-style: none;
+  background-size: cover;
+
+  .login-container {
+    /* ===== Login Container | Body ===== */
+    height: 100vh;
+    width: 100%;
+
+    .login-card {
+      /* ===== Login Card | Login Container ===== */
+      background-color: var(--card-background-color);
+      border: 2px solid var(--card-border-color);
+      border-radius: 10px;
+
+      .header-one {
+        /* ===== Header #1 | Login Card ===== */
+        color: var(--text-color-white);
+      }
+
+      .header-two {
+        /* ===== Header #2 | Login Card ===== */
+        color: var(--text-color-white);
+        font-size: 16px;
+        opacity: 70%;
+      }
+
+      .input-large {
+        /* ===== Large Field | Login Form ===== */
+        border: 2px solid var(--input-border-color);
+        background-color: var(--card-border-color);
+        color: var(--text-color-white);
+        padding: 15px 15px 15px 15px;
+        border-radius: 7px;
+        border: none;
+        width: 458px;
+
+        &:focus {
+          /* ===== Focus | Large Field ===== */
+          outline: none;
+        }
+      }
+
+      .password-field {
+        /* ===== Password Field | Login Form ===== */
+        border: 2px solid var(--input-border-color);
+        background-color: var(--card-border-color);
+        color: var(--text-color-white);
+        padding: 0px 15px 0px 0px;
+        border-radius: 7px;
+        border: none;
+      }
+
+      .input-large-t {
+        /* ===== Password Input | Login Form ===== */
+        color: var(--text-color-white);
+        border: 2px solid transparent;
+        background-color: transparent;
+        padding: 15px 15px 15px 15px;
+        border-radius: 7px;
+        border: none;
+        width: 100%;
+
+        &:focus {
+          /* ===== Focus | Password Field ===== */
+          outline: none;
+        }
+      }
+
+      .login-account-btn {
+        /* ===== Create Account | Login Form ===== */
+        background: var(--website-gradient);
+        color: var(--text-color-white);
+        border-radius: 7px;
+        height: 54px;
+        width: 100%;
+      }
+
+      .google-btn {
+        /* ===== Google Third Party | Login Form ===== */
+        border: 2px solid var(--input-border-color);
+        background-color: var(--card-border-color);
+        color: var(--text-color-white);
+        border-radius: 7px;
+        height: 54px;
+        width: 100%;
+      }
+
+      .apple-btn {
+        /* ===== Apple Third Party | Login Form ===== */
+        border: 2px solid var(--input-border-color);
+        background-color: var(--card-border-color);
+        color: var(--text-color-white);
+        border-radius: 7px;
+        height: 54px;
+        width: 100%;
+
+        .fa-apple {
+          /* ===== Icon | Apple Third Party ===== */
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  /* ===== Hide Eye | Microsoft ===== */
+  display: none;
+}
+
+.register-link {
+  /* ===== Register Link | Login Form ===== */
+  -webkit-text-fill-color: transparent;
+  background: var(--website-gradient);
+  -webkit-background-clip: text;
+  display: inline-block;
+  color: transparent;
+
+  &:hover {
+    /* ===== Hover | Register Link ===== */
+    cursor: pointer;
+  }
+}
