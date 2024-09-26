@@ -36,6 +36,8 @@ function FormatNumber(Number) {
 $(document).ready(function () {
   GetCryptoDataForHome();
 
+  GetCurrencyHistory();
+
   document.querySelectorAll(".explore-wallet-btn").forEach((Button) => {
     Button.addEventListener("click", function () {
       if (this.textContent.includes("Explore Wallet")) {
@@ -54,6 +56,7 @@ $(document).ready(function () {
     const MarketCap = FormatNumber($(this).data("marketcap"));
     const Supply = FormatNumber($(this).data("supply"));
     const Price = FormatNumber($(this).data("price"));
+    const CurrencyURL = $(this).data("id");
 
     // Update the modal content
     $(".currency-name").text(CurrencyName);
@@ -68,7 +71,89 @@ $(document).ready(function () {
     $(".currency-details .info-digits").eq(2).text(Supply);
     $(".currency-details .info-digits").eq(3).text(Price);
 
+    GetCurrencyHistory(CurrencyURL);
+
     // Show the modal
     $("#CurrencyInformation").modal("show");
   });
 });
+
+function GetCurrencyHistory(CurrencyURL) {
+  const endTime = new Date().getTime();
+  const startTime = endTime - 7 * 24 * 60 * 60 * 1000;
+
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: `https://api.coincap.io/v2/assets/${CurrencyURL}/history?interval=d1&start=${startTime}&end=${endTime}`,
+
+    success: function (HistoryData) {
+      console.log(HistoryData);
+
+      const DateArray = [];
+      const PriceArray = [];
+
+      $.each(HistoryData.data, function (index, value) {
+        // Format the date to MM/DD or DD-MM as needed
+        const formattedDate = new Date(value.date).toLocaleDateString("en-US", {
+          month: "2-digit",
+          day: "2-digit",
+        });
+        DateArray.push(formattedDate);
+        PriceArray.push(value.priceUsd);
+      });
+
+      generateChart(DateArray, PriceArray);
+    },
+  });
+}
+
+function generateChart(chartDate, chartPrice) {
+  var ctx = document.getElementById("currency-history").getContext("2d");
+
+  var graph = Chart.getChart("currency-history");
+
+  if (graph) {
+    graph.destroy();
+  }
+
+  var graph = new Chart(ctx, {
+    type: "line",
+
+    data: {
+      labels: chartDate,
+      datasets: [
+        {
+          type: "line",
+          label: "Price (USD)",
+          borderColor: "#d719b6",
+          data: chartPrice,
+        },
+      ],
+    },
+
+    options: {
+      scales: {
+        x: [
+          {
+            display: true,
+            title: {
+              display: true,
+              labelString: "Date",
+            },
+          },
+        ],
+        y: [
+          {
+            display: true,
+            title: {
+              display: true,
+              labelString: "Price",
+            },
+          },
+        ],
+      },
+      elements: { point: { radius: 0 } },
+    },
+  });
+}

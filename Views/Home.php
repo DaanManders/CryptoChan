@@ -17,15 +17,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!----- Jquery CDN Link | HTML Import ----->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
     <!----- Link Mustache JS Template | HTML Import ----->
     <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../JS/Home.js"></script>
     <!----- Website Icon | HTML Import ----->
     <link rel="icon" href="../SCSS/Images/Emote.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="../JS/Home.js"></script>
     <title>CryptoChan</title>
 </head>
 <body class="body-container w-100 h-100">
@@ -106,7 +106,7 @@
         <!----- Mustache Template loading | Currency Table ----->
         <template id="all-currencies-template">
             {{#data}}
-                <tr class="currency-row" data-name="{{name}}" data-symbol="{{symbol}}" data-image="{{CoinImage}}" data-volume="{{volumeUsd24Hr}}" data-marketcap="{{marketCapUsd}}" data-supply="{{supply}}" data-price="{{priceUsd}}">
+                <tr class="currency-row" data-name="{{name}}" data-symbol="{{symbol}}" data-image="{{CoinImage}}" data-volume="{{volumeUsd24Hr}}" data-marketcap="{{marketCapUsd}}" data-supply="{{supply}}" data-price="{{priceUsd}}" data-id="{{id}}">
                     <!----- Currency Name | Currency Table ----->
                     <td class="currency-table-body-item fw-bolder ps-5 pt-3 pb-3">
                         <img src="{{CoinImage}}" alt="{{symbol}} logo" width="15" height="15" class="me-2">
@@ -133,7 +133,7 @@
     </div>
     <!--  -->
     <div class="modal fade" id="CurrencyInformation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered d-flex align-items-center justify-content-center">
             <div class="modal-content">
                 <!--  -->
                 <div class="modal-header d-flex justify-content-between align-items-center">
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="currency-detail d-flex align-items-center p-3 me-3">
+                        <div class="currency-detail d-flex align-items-center ps-3 pt-3 pb-3">
                             <div class="detail-image d-flex align-items-center justify-content-center me-3">
                                 <i class="fa-solid fa-boxes-packing"></i>
                             </div>
@@ -184,8 +184,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="currency-details mt-3 pe-3">
-                        <div class="currency-detail large d-flex align-items-center p-3">
+                    <div class="currency-details mt-3">
+                        <div class="currency-detail large d-flex align-items-center ps-3 pt-3 pb-3">
                             <div class="detail-image d-flex align-items-center justify-content-center me-3">
                                 <i class="fa-solid fa-money-bill"></i>
                             </div>
@@ -198,6 +198,7 @@
                             </div>
                         </div>
                     </div>
+                    <canvas class="graph mt-3 p-3 d-flex flex-column align-items-center" id="currency-history"></canvas>
                 </div>
             </div>
         </div>
