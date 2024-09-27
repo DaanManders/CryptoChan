@@ -17,8 +17,20 @@ function GetCryptoDataForHome() {
   });
 }
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null;
+}
+
 function NavigateToRegister() {
-  window.location.href = "http://localhost/CryptoChan/Views/register.php";
+  const LoggedIn = getCookie("loggedin") === "yes";
+  if (LoggedIn) {
+    window.location.href = "http://localhost/CryptoChan/Views/wallet.php";
+  } else {
+    window.location.href = "http://localhost/CryptoChan/Views/register.php";
+  }
 }
 
 function FormatNumber(Number) {

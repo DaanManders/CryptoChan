@@ -1,0 +1,32 @@
+:root {
+  /* ===== Website Variables | CSS Variables ===== */
+  --website-gradient: linear-gradient(45deg, #d719b6, #371ad2);
+  --background-hyperlink: url("./Images/Background.jpg");
+  --font-family-tilt-warp: "Tilt Warp", sans-serif;
+  --font-family-lato: "Lato", sans-serif;
+  --button-background-color: #1d112c;
+  --website-transition: all 0.2s ease;
+  --table-background-color: #141126;
+  --navigation-item-color: #cfcfcf;
+  --table-border-color: #1d1a2e;
+  --background-color: #0a071d;
+  --text-color-white: #fff;
+  --primary-color: #d719b6;
+  --border-color: #4b4b4b;
+}
+
+::-webkit-scrollbar {
+  /* ===== Scrollbar Hide | HTML ===== */
+  height: 0;
+  width: 0;
+}
+
+.body-container {
+  /* ===== Body Container | Background Settings ===== */
+  background-image: var(--background-hyperlink);
+  background-color: var(--background-color);
+  font-family: var(--font-family-lato);
+  background-repeat: no-repeat;
+  -ms-overflow-style: none;
+  background-size: contain;
+}

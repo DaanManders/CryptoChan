@@ -199,6 +199,10 @@
                         </div>
                     </div>
                     <canvas class="graph mt-3 p-3 d-flex flex-column align-items-center" id="currency-history"></canvas>
+                    <button type="submit" class="add-to-wallet-btn fw-bolder mt-3 border-0 p-3">
+                        <i class="fa-solid fa-wallet me-2"></i>
+                        Add to Wallet
+                    </button>
                 </div>
             </div>
         </div>
