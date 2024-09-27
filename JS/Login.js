@@ -39,12 +39,13 @@ function Login() {
       success: function (response) {
         if (response.startsWith("Error:")) {
           alert(response); // Print Response.
+        } else if (response.startsWith("Login")) {
+          window.location.href = "Home.php";
+          localStorage.setItem("loggedin", "yes");
         } else {
           alert(response);
           // Redirect to Home or dashboard.
-          window.location.href = "Home.php";
-
-          document.cookie = "loggedin=yes";
+          window.location.href = "Login.php";
         }
       },
 

@@ -25,7 +25,7 @@ function getCookie(name) {
 }
 
 function NavigateToRegister() {
-  const LoggedIn = getCookie("loggedin") === "yes";
+  const LoggedIn = localStorage.getItem("loggedin") === "yes";
   if (LoggedIn) {
     window.location.href = "http://localhost/CryptoChan/Views/wallet.php";
   } else {
@@ -57,6 +57,16 @@ $(document).ready(function () {
       }
     });
   });
+
+  Add = document.getElementById("add");
+
+  if (localStorage.getItem("loggedin") === "yes") {
+    if (Add.classList.contains("hidden")) {
+      Add.classList.remove("hidden");
+    } else {
+      Add.classList.add("hidden");
+    }
+  }
 
   // Add a click event listener for the currency rows
   $(document).on("click", ".currency-row", function () {

@@ -37,7 +37,7 @@
         </div>
         <!----- CryptoChan Navigation Menu | Body Container ----->
         <div class="navigation-center d-flex justify-content-center align-items-center">
-            <a class="navigation-item text-decoration-none fw-bold" href="#">Dashboard</a>
+            <a class="navigation-item text-decoration-none fw-bold" href="#">Home</a>
             <a class="navigation-item text-decoration-none fw-bold" href="#">Community</a>
             <a class="navigation-item text-decoration-none fw-bold" href="#">Products</a>
             <a class="navigation-item text-decoration-none fw-bold" href="#">Learn</a>
@@ -199,7 +199,7 @@
                         </div>
                     </div>
                     <canvas class="graph mt-3 p-3 d-flex flex-column align-items-center" id="currency-history"></canvas>
-                    <button type="submit" class="add-to-wallet-btn fw-bolder mt-3 border-0 p-3">
+                    <button type="submit" class="add-to-wallet-btn hidden fw-bolder mt-3 border-0 p-3" id="add">
                         <i class="fa-solid fa-wallet me-2"></i>
                         Add to Wallet
                     </button>

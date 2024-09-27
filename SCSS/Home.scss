@@ -28,7 +28,7 @@
   font-family: var(--font-family-lato);
   background-repeat: no-repeat;
   -ms-overflow-style: none;
-  background-size: contain;
+  background-size: cover;
 
   .navigation-menu {
     /* ===== Navigation Menu | Body Container ===== */
@@ -295,4 +295,8 @@
   color: var(--text-color-white);
   border-radius: 10px;
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }

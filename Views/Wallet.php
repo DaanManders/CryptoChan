@@ -28,6 +28,60 @@
     <title>Wallet</title>
 </head>
 <body class="body-container w-100 h-100">
-<!--  -->
+    <nav class="navigation-menu d-flex justify-content-between align-items-center">
+        <div class="navigation-start d-flex justify-content-center align-items-center">
+            <!----- CryptoChan Website Logo | Imported Image File Explorer ----->
+            <img class="website-brandmark" src="../SCSS/Images/Brand.png">
+        </div>
+        <!----- CryptoChan Navigation Menu | Body Container ----->
+        <div class="navigation-center d-flex justify-content-center align-items-center">
+            <a class="navigation-item text-decoration-none fw-bold" href="Home.php">Home</a>
+            <a class="navigation-item text-decoration-none fw-bold" href="#">Community</a>
+            <a class="navigation-item text-decoration-none fw-bold" href="#">Products</a>
+            <a class="navigation-item text-decoration-none fw-bold" href="#">Learn</a>
+        </div>
+        <!----- CryptoChan Navigation Menu | Body Container ----->
+        <div class="navigation-end d-flex justify-content-center align-items-center">
+            <div class="navigation-language d-flex align-items-center">
+                <i class="navigation-color fa-solid fa-globe me-3"></i>
+                <span class="navigation-color fw-bold">English</span>
+                <i class="navigation-color fa-solid fa-chevron-down ms-3"></i>
+            </div>
+            <!----- Explore Wallet Button | Navigation Menu ----->
+            <button class="logout-btn border-0 fw-bolder ms-5" id="logout">Logout</button>
+        </div>
+    </nav>
+    <div class="wallet-container mt-5">
+        <div class="table-wrapper">
+            <table class="currency-table">
+                <!----- Currency Table | Main Currency ----->
+                <thead class="curreny-table-header">
+                    <tr>
+                        <!----- Table Header | Currency Table ----->
+                        <th class="currency-table-header-item fw-bolder ps-5 pt-3 pb-3">
+                            <span>Name</span>
+                            <i class="filter fa-solid fa-caret-down ms-1"></i>
+                        </th>
+                        <!----- Table Header | Currency Table ----->
+                        <th class="currency-table-header-item fw-bolder pt-3 pb-3">
+                            <span>Amount</span>
+                            <i class="filter fa-solid fa-caret-down ms-1"></i>
+                        </th>
+                        <!----- Table Header | Currency Table ----->
+                        <th class="currency-table-header-item fw-bolder pt-3 pb-3">
+                            <span>Current Price</span>
+                            <i class="filter fa-solid fa-caret-down ms-1"></i>
+                        </th>
+                        <th class="currency-table-header-item fw-bolder pt-3 pb-3">
+                            <span>Actions</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="currency-table-body">
+                    <!----- Mustache JavaScript Template ----->
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

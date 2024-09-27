@@ -28,5 +28,127 @@
   font-family: var(--font-family-lato);
   background-repeat: no-repeat;
   -ms-overflow-style: none;
-  background-size: contain;
+  background-size: cover;
+
+  .navigation-menu {
+    /* ===== Navigation Menu | Body Container ===== */
+    padding: 0px 150px 0px 150px;
+    margin: 30px 0px 0px 0px;
+
+    .navigation-start {
+      /* ===== Navigation Menu | Left ===== */
+      .website-brandmark {
+        height: 75px;
+      }
+    }
+
+    .navigation-center {
+      /* ===== Navigation Menu | Middle ===== */
+      .navigation-item {
+        transition: var(--website-transition);
+        color: var(--navigation-item-color);
+        padding: 0px 20px 0px 20px;
+
+        &:hover {
+          /* ===== Navigation Menu | Hover ===== */
+          color: var(--text-color-white);
+        }
+      }
+    }
+
+    .navigation-end {
+      /* ===== Navigation Menu | End ===== */
+      .navigation-color {
+        color: var(--navigation-item-color);
+      }
+
+      .logout-btn {
+        /* ===== Explore Wallet | Button ===== */
+        transition: var(--website-transition);
+        background: var(--website-gradient);
+        color: var(--text-color-white);
+        border-radius: 10px;
+        font-size: 16px;
+        height: 50px;
+        width: 160px;
+      }
+    }
+  }
+
+  .wallet-container {
+    height: 100vh;
+    padding: 0px 150px;
+
+    .table-wrapper {
+      /* ===== Wrapper | Currency Table ===== */
+      background-color: var(--table-background-color);
+      border: 3px solid var(--table-border-color);
+      border-radius: 10px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .currency-table {
+      /* ===== Table Settings | Currency Table ===== */
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+    }
+
+    .curreny-table-header {
+      /* ===== Text Settings | Currency Table Header ===== */
+      color: var(--primary-color);
+      font-size: 12px;
+    }
+
+    .currency-table-header-item {
+      /* ===== Table Header | Currency Table Header ===== */
+      border-bottom: 3px solid var(--table-border-color);
+      background-color: var(--table-background-color);
+      position: sticky;
+      z-index: 1;
+      top: 0;
+    }
+
+    .currency-table-header-item span {
+      /* ===== Table Topic | Currency Table Header ===== */
+      -webkit-text-fill-color: transparent;
+      background: var(--website-gradient);
+      -webkit-background-clip: text;
+      display: inline-block;
+      color: transparent;
+    }
+
+    .currency-table-header-item i {
+      /* ===== Coin Images | Currency Table Body ===== */
+      color: var(--text-color-white);
+    }
+
+    .currency-table-body-item {
+      /* ===== Text Color | Currency Table Body ===== */
+      color: var(--navigation-item-color);
+      font-size: 11px;
+
+      .dollar {
+        /* ===== Dollar Color | Currency Table Body ===== */
+        color: greenyellow;
+      }
+    }
+
+    .currency-table tbody tr:nth-child(odd) {
+      /* ===== Table Row Background | Currency Table Body ===== */
+      background-color: #19172a;
+    }
+
+    .currency-table tbody tr:nth-child(even) {
+      /* ===== Table Row Background | Currency Table Body ===== */
+      background-color: #141126;
+    }
+
+    .symbol {
+      /* ===== Filter Symbol | Currency Table Header ===== */
+      color: var(--text-color-white);
+      opacity: 60%;
+    }
+  }
 }
