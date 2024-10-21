@@ -97,8 +97,69 @@ $(document).ready(function () {
 
     // Show the modal
     $("#CurrencyInformation").modal("show");
+
+    RegisterCurrencyData(CurrencyURL, CurrencyName, CurrencySymbol, Price);
   });
 });
+
+function RegisterCurrencyData(
+  CurrencyID,
+  CurrencyName,
+  CurrencySymbol,
+  CurrencyPrice
+) {
+  Add = document.getElementById("add");
+
+  Add.addEventListener("click", function () {
+    var CurrencyAmount = $("#amount").val();
+    var UserID = localStorage.getItem("user_id");
+
+    AddCurrencyToWallet(
+      UserID,
+      CurrencyID,
+      CurrencyName,
+      CurrencySymbol,
+      CurrencyAmount,
+      CurrencyPrice
+    );
+  });
+}
+
+function AddCurrencyToWallet(
+  UserID,
+  CurrencyID,
+  CurrencyName,
+  CurrencySymbol,
+  CurrencyAmount,
+  CurrencyPrice
+) {
+  $.ajax({
+    type: "POST",
+    url: "../INC/Functions.php",
+    data: {
+      action: "AddCurrencyToWallet",
+      user_id: UserID,
+      id: CurrencyID,
+      name: CurrencyName,
+      symbol: CurrencySymbol,
+      amount: CurrencyAmount,
+      price: CurrencyPrice,
+    },
+
+    success: function (response) {
+      // Check the response for success
+      if (response.includes("Error:")) {
+        alert(response); // Handle the error response
+      } else {
+        // If successful, redirect to the wallet page
+        window.location.href = "http://localhost/CryptoChan/Views/wallet.php";
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      alert("An error occurred: " + textStatus); // Handle AJAX error
+    },
+  });
+}
 
 function GetCurrencyHistory(CurrencyURL) {
   const endTime = new Date().getTime();

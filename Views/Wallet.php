@@ -77,11 +77,35 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="currency-table-body">
+                <tbody id="currency-wallet-body">
                     <!----- Mustache JavaScript Template ----->
                 </tbody>
             </table>
         </div>
+        <template id="wallet-currencies-template">
+            {{#data}}
+                <tr class="currency-row" data-name="{{name}}" data-symbol="{{symbol}}" data-image="{{CoinImage}}" data-volume="{{volumeUsd24Hr}}" data-marketcap="{{marketCapUsd}}" data-supply="{{supply}}" data-price="{{priceUsd}}" data-id="{{id}}">
+                    <!----- Currency Name | Currency Table ----->
+                    <td class="currency-table-body-item fw-bolder ps-5 pt-3 pb-3">
+                        <img src="{{CoinImage}}" alt="{{symbol}} logo" width="15" height="15" class="me-2">
+                        {{currencyName}} <span class="symbol ms-1">{{currencySymbol}}</span>
+                    </td>
+                    <!----- Currency Price USD | Currency Table ----->
+                    <td class="currency-table-body-item fw-bolder pt-3 pb-3">
+                        {{currencyAmount}}
+                    </td>
+                    <!----- Currency Trading Volume 24Hr | Currency Table ----->
+                    <td class="currency-table-body-item fw-bolder pt-3 pb-3">
+                        <span class="dollar">$</span>
+                        {{currencyPrice}}
+                    </td>
+                    <!----- Currency Market Capacity | Currency Table ----->
+                    <td class="currency-table-body-item fw-bolder pt-3 pb-3">
+                        <!--  -->
+                    </td>
+                </tr>
+            {{/data}}
+        </template>
     </div>
 </body>
 </html>

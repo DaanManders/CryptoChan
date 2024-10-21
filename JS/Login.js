@@ -37,14 +37,14 @@ function Login() {
 
       // AJAX Call Success.
       success: function (response) {
-        if (response.startsWith("Error:")) {
-          alert(response); // Print Response.
-        } else if (response.startsWith("Login")) {
+        var data = JSON.parse(response); // Parse the JSON response
+
+        if (data.status === "success") {
           window.location.href = "Home.php";
           localStorage.setItem("loggedin", "yes");
+          localStorage.setItem("user_id", data.user_id); // Store user_id
         } else {
-          alert(response);
-          // Redirect to Home or dashboard.
+          alert(response); // Handle any other responses, such as error messages
           window.location.href = "Login.php";
         }
       },

@@ -300,3 +300,14 @@
 .hidden {
   display: none;
 }
+
+.currency-amount {
+  border-radius: 10px;
+  border: none;
+  height: 56px;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+}
