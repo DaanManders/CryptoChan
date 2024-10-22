@@ -1,242 +1,261 @@
-function GetCryptoDataForHome() {
+function GetAllCurrencyData() {
+  // Get All Currency Data from API.
   $.ajax({
-    type: "GET",
-    dataType: "json",
-    url: "https://api.coincap.io/v2/assets",
-    success: function (data) {
-      var Currencies = data.data;
-      var Template = $("#all-currencies-template").html();
+    type: "GET", // GET Request.
+    dataType: "json", // Return Data in JSON.
+    url: "https://api.coincap.io/v2/assets", // API URL.
 
+    // If AJAX is Successful.
+    success: function (data) {
+      var Currencies = data.data; // Push API Data in the Currencies Array Variable.
+      var Template = $("#all-currencies-template").html(); // Assign the Mustache Template.
+
+      // Loop Through the Currencies Object.
       Currencies.forEach((Currency) => {
+        // Get Currency Image by Getting the Currency Symbol in LowerCase.
         Currency.CoinImage = `https://assets.coincap.io/assets/icons/${Currency.symbol.toLowerCase()}@2x.png`;
       });
 
+      // Render Mustache Template with the Correct Array.
       var RenderTemplate = Mustache.render(Template, { data: Currencies });
-      $("#currency-table-body").html(RenderTemplate);
+      $("#currency-table-body").html(RenderTemplate); // Render Template in Home.php.
     },
   });
 }
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-  return null;
-}
-
 function NavigateToRegister() {
+  // Assign Logged In Variable based on LocalStorage.
   const LoggedIn = localStorage.getItem("loggedin") === "yes";
-  if (LoggedIn) {
-    window.location.href = "http://localhost/CryptoChan/Views/wallet.php";
-  } else {
-    window.location.href = "http://localhost/CryptoChan/Views/register.php";
-  }
+
+  window.location.href = LoggedIn // Checks if the User is Logged In.
+    ? "http://localhost/CryptoChan/Views/wallet.php" // Redirect to Wallet.php if User is Logged In.
+    : "http://localhost/CryptoChan/Views/register.php"; // Redirect to Register.php if User is NOT Logged In.
 }
 
-function FormatNumber(Number) {
-  if (Number >= 1e9) {
-    return (Number / 1e9).toFixed(2) + "B"; // Format billions
-  } else if (Number >= 1e6) {
-    return (Number / 1e6).toFixed(2) + "M"; // Format millions
-  } else if (Number >= 1e3) {
-    return (Number / 1e3).toFixed(2) + "K"; // Format thousands
-  } else {
-    return Number; // Return as is if less than 1000
-  }
+function FormattingCurrencyData(CurrencyData) {
+  // Formats Long Currency Data to a Shorter Notation.
+  if (CurrencyData >= 1e9) return (CurrencyData / 1e9).toFixed(2) + "B"; // Bilion.
+  if (CurrencyData >= 1e6) return (CurrencyData / 1e6).toFixed(2) + "M"; // Milion.
+  if (CurrencyData >= 1e3) return (CurrencyData / 1e3).toFixed(2) + "K"; // Thousand.
+  return CurrencyData; // Return Shorter Notation.
 }
 
-$(document).ready(function () {
-  GetCryptoDataForHome();
+function RegisterCurrencyData(CurrencyID, CurrencyName, CurrencySymbol, Price) {
+  // Assign Add to Wallet Button to a Specific Variable.
+  AddCurrency = document.getElementById("add");
 
-  GetCurrencyHistory();
-
-  document.querySelectorAll(".explore-wallet-btn").forEach((Button) => {
-    Button.addEventListener("click", function () {
-      if (this.textContent.includes("Explore Wallet")) {
-        NavigateToRegister();
-      }
-    });
-  });
-
-  Add = document.getElementById("add");
-
-  if (localStorage.getItem("loggedin") === "yes") {
-    if (Add.classList.contains("hidden")) {
-      Add.classList.remove("hidden");
-    } else {
-      Add.classList.add("hidden");
-    }
-  }
-
-  // Add a click event listener for the currency rows
-  $(document).on("click", ".currency-row", function () {
-    // Get the currency data from the clicked row
-    const CurrencyName = $(this).data("name");
-    const CurrencySymbol = $(this).data("symbol");
-    const CurrencyImage = $(this).data("image");
-    const TradingVolume = FormatNumber($(this).data("volume"));
-    const MarketCap = FormatNumber($(this).data("marketcap"));
-    const Supply = FormatNumber($(this).data("supply"));
-    const Price = FormatNumber($(this).data("price"));
-    const CurrencyURL = $(this).data("id");
-
-    // Update the modal content
-    $(".currency-name").text(CurrencyName);
-    $(".currency-symbol").text(CurrencySymbol);
-    $("#CurrencyInformation .modal-header img")
-      .attr("src", CurrencyImage)
-      .show();
-
-    // Update the modal body details
-    $(".currency-details .info-digits").eq(0).text(TradingVolume);
-    $(".currency-details .info-digits").eq(1).text(MarketCap);
-    $(".currency-details .info-digits").eq(2).text(Supply);
-    $(".currency-details .info-digits").eq(3).text(Price);
-
-    GetCurrencyHistory(CurrencyURL);
-
-    // Show the modal
-    $("#CurrencyInformation").modal("show");
-
-    RegisterCurrencyData(CurrencyURL, CurrencyName, CurrencySymbol, Price);
-  });
-});
-
-function RegisterCurrencyData(
-  CurrencyID,
-  CurrencyName,
-  CurrencySymbol,
-  CurrencyPrice
-) {
-  Add = document.getElementById("add");
-
-  Add.addEventListener("click", function () {
-    var CurrencyAmount = $("#amount").val();
-    var UserID = localStorage.getItem("user_id");
+  // Add Click Event to the Add to Wallet Button.
+  AddCurrency.addEventListener("click", function () {
+    var UserID = localStorage.getItem("user_id"); // Extract User ID from Local Storage.
+    var Amount = $("#amount").val(); // Extract Currency Amount from Input Field.
 
     AddCurrencyToWallet(
-      UserID,
-      CurrencyID,
-      CurrencyName,
-      CurrencySymbol,
-      CurrencyAmount,
-      CurrencyPrice
+      UserID, // Pass User ID to the Function.
+      CurrencyID, // Pass Currency ID to the Function.
+      CurrencyName, // Pass Currency Name to the Function.
+      CurrencySymbol, // Pass Currency Symbol to the Function.
+      Amount, // Pass Currency Amount to the Function.
+      Price // Pass Currency Price to the Function.
     );
   });
 }
 
 function AddCurrencyToWallet(
-  UserID,
-  CurrencyID,
-  CurrencyName,
-  CurrencySymbol,
-  CurrencyAmount,
-  CurrencyPrice
+  UserID, // Extract User ID.
+  CurrencyID, // Extract Currency ID.
+  CurrencyName, // Extract Currency Name.
+  CurrencySymbol, // Extract Currency Symbol.
+  CurrencyAmount, // Extract Currency Amount.
+  CurrencyPrice // Extract Currency Price.
 ) {
   $.ajax({
-    type: "POST",
-    url: "../INC/Functions.php",
+    type: "POST", // POST Request.
+    url: "../INC/Functions.php", // Include Functions.php with URL.
     data: {
-      action: "AddCurrencyToWallet",
-      user_id: UserID,
-      id: CurrencyID,
-      name: CurrencyName,
-      symbol: CurrencySymbol,
-      amount: CurrencyAmount,
-      price: CurrencyPrice,
+      action: "AddCurrencyToWallet", // Add Action to AJAX Request.
+      user_id: UserID, // Push User ID in JSON Data.
+      id: CurrencyID, // Push Currency ID in JSON Data.
+      name: CurrencyName, // Push Currency Name in JSON Data.
+      symbol: CurrencySymbol, // Push Currency Symbol in JSON Data.
+      amount: CurrencyAmount, // Push Currency Amount in JSON Data.
+      price: CurrencyPrice, // Push Currency Price in JSON Data.
     },
 
+    // If AJAX Request is Succesful.
     success: function (response) {
-      // Check the response for success
+      // If Response Include "Error" in Message.
       if (response.includes("Error:")) {
-        alert(response); // Handle the error response
+        alert(response); // Log the Response in an Alert.
       } else {
-        // If successful, redirect to the wallet page
+        // Redirect to the User's Wallet.
         window.location.href = "http://localhost/CryptoChan/Views/wallet.php";
       }
     },
-    error: function (jqXHR, textStatus, errorThrown) {
-      alert("An error occurred: " + textStatus); // Handle AJAX error
+
+    // If AJAX Request fails.
+    error: function (jqXHR, textStatus) {
+      // Log the Error in an Alert.
+      alert("An error occurred: " + textStatus);
     },
   });
 }
 
+// Get Currency History from CoinCap API.
 function GetCurrencyHistory(CurrencyURL) {
-  const endTime = new Date().getTime();
-  const startTime = endTime - 7 * 24 * 60 * 60 * 1000;
+  const EndDate = new Date().getTime(); // Get the End Date from the Start Date.
+  const StartDate = EndDate - 7 * 24 * 60 * 60 * 1000; // Get the Start Date of the Currency History (Weekly).
 
   $.ajax({
-    type: "GET",
-    dataType: "json",
-    url: `https://api.coincap.io/v2/assets/${CurrencyURL}/history?interval=d1&start=${startTime}&end=${endTime}`,
+    type: "GET", // GET Request.
+    dataType: "json", // Return Data in JSON.
+    url: `https://api.coincap.io/v2/assets/${CurrencyURL}/history?interval=d1&start=${StartDate}&end=${EndDate}`,
+    // Checks the Currency History of the Selected URL with the Start Date & End Date (Weekly).
 
+    // If AJAX Request is Succesful.
     success: function (HistoryData) {
-      console.log(HistoryData);
+      const PriceArray = []; // Initialize Currency Price Array.
+      const DateArray = []; // Initialize Currency Date Array.
 
-      const DateArray = [];
-      const PriceArray = [];
-
-      $.each(HistoryData.data, function (index, value) {
-        // Format the date to MM/DD or DD-MM as needed
-        const formattedDate = new Date(value.date).toLocaleDateString("en-US", {
-          month: "2-digit",
-          day: "2-digit",
+      // Loops Through the Currency History Data.
+      $.each(HistoryData.data, function (index, Value) {
+        // Formats the Currency History Data in Months & Days (EN - US Time).
+        const FormattedDate = new Date(Value.date).toLocaleDateString("en-US", {
+          month: "2-digit", // Two Month Digits.
+          day: "2-digit", // Two Day Digits.
         });
-        DateArray.push(formattedDate);
-        PriceArray.push(value.priceUsd);
+
+        PriceArray.push(Value.priceUsd); // Push Currency Price (Data) in Price Array.
+        DateArray.push(FormattedDate); // Push Currency Date (Data) in Date Array.
       });
 
-      generateChart(DateArray, PriceArray);
+      // Generate Currency History Chart based on Currency Array's.
+      GenerateCurrencyHistoryChart(DateArray, PriceArray);
     },
   });
 }
 
-function generateChart(chartDate, chartPrice) {
-  var ctx = document.getElementById("currency-history").getContext("2d");
+function GenerateCurrencyHistoryChart(CurrencyDate, CurrencyPrice) {
+  // Assign Chart.js Variable(s) to Generate the Currency History Chart.
+  var Context = document.getElementById("currency-history").getContext("2d");
+  var Graph = Chart.getChart("currency-history"); // Get Chart from Wallet.php.
 
-  var graph = Chart.getChart("currency-history");
+  // If Graph Already Exists.
+  if (Graph) Graph.destroy();
 
-  if (graph) {
-    graph.destroy();
-  }
-
-  var graph = new Chart(ctx, {
-    type: "line",
-
+  // Generate new Chart.
+  var Graph = new Chart(Context, {
+    type: "line", // Chart Type.
     data: {
-      labels: chartDate,
+      labels: CurrencyDate, // Chart Labels.
       datasets: [
         {
-          type: "line",
-          label: "Price (USD)",
-          borderColor: "#d719b6",
-          data: chartPrice,
+          label: "Price (USD)", // Chart Label.
+          borderColor: "#d719b6", // Line Color.
+          data: CurrencyPrice, // Chart Data.
+          fill: false, // Prevent Filling the Area under Line.
         },
       ],
     },
 
     options: {
       scales: {
-        x: [
-          {
+        x: {
+          type: "category", // Set Category for String Label(s).
+          title: {
             display: true,
-            title: {
-              display: true,
-              labelString: "Date",
-            },
+            text: "Date", // Label for the X-Axis.
           },
-        ],
-        y: [
-          {
+        },
+        y: {
+          type: "linear", // Set Linear for Numerical Value(s).
+          title: {
             display: true,
-            title: {
-              display: true,
-              labelString: "Price",
-            },
+            text: "Price", // Label for the Y-Axis.
           },
-        ],
+        },
       },
-      elements: { point: { radius: 0 } },
+      elements: {
+        point: {
+          radius: 3, // Points on the Line
+        },
+      },
     },
   });
 }
+
+// If Document is Fully Loaded & Parsed.
+$(document).ready(function () {
+  // Get Currency Data from CoinCap API.
+  GetAllCurrencyData();
+
+  // Get Currency History from CoinCap API.
+  GetCurrencyHistory();
+
+  // Checks for all Buttons in Application with Explore Wallet Class.
+  document.querySelectorAll(".explore-wallet-btn").forEach((Button) => {
+    // Adding a Click Event to the Explore Wallet Buttons.
+    Button.addEventListener("click", function () {
+      // If the Button Text contains "Explore Wallet" Handle Navigation.
+      if (this.textContent.includes("Explore Wallet")) NavigateToRegister();
+    });
+  });
+
+  document.addEventListener("click", function (event) {
+    // Check if the clicked element has the class 'currency-row'.
+    if (event.target.closest(".currency-row")) {
+      const row = event.target.closest(".currency-row");
+
+      const CurrencyName = row.dataset.name; // Get Currency Name.
+      const CurrencySymbol = row.dataset.symbol; // Get Currency Symbol.
+      const CurrencyImage = row.dataset.image; // Get Currency Image.
+
+      const TradingVolume = FormattingCurrencyData(row.dataset.volume); // Get Trading Volume.
+      const MarketCap = FormattingCurrencyData(row.dataset.marketcap); // Get Market Cap.
+      const Supply = FormattingCurrencyData(row.dataset.supply); // Get Supply.
+      const Price = FormattingCurrencyData(row.dataset.price); // Get Price.
+
+      const CurrencyURL = row.dataset.id; // Get Currency ID.
+
+      // Update modal content.
+      document.querySelector(".currency-name").textContent = CurrencyName; // Set Currency Name.
+      document.querySelector(".currency-symbol").textContent = CurrencySymbol; // Set Currency Symbol.
+
+      // Update Currency Image in Modal.
+      const currencyImage = document.querySelector(
+        "#CurrencyInformation .modal-header img"
+      );
+
+      currencyImage.src = CurrencyImage;
+      currencyImage.style.display = "block"; // Show image.
+
+      // Edit remaining currency data in the modal.
+      const infoDigits = document.querySelectorAll(
+        ".currency-details .info-digits"
+      );
+
+      infoDigits[0].textContent = TradingVolume; // Set Trading Volume.
+      infoDigits[1].textContent = MarketCap; // Set Market Cap.
+      infoDigits[2].textContent = Supply; // Set Supply.
+      infoDigits[3].textContent = Price; // Set Price.
+
+      // Get currency history from CoinCap API.
+      GetCurrencyHistory(CurrencyURL);
+
+      // Show the modal
+      $("#CurrencyInformation").modal("show"); // Ensure you have a method to show the modal.
+
+      // Register currency data for adding to wallet.
+      RegisterCurrencyData(CurrencyURL, CurrencyName, CurrencySymbol, Price);
+    }
+  });
+
+  // Assigning Add Currency Button to a Variable.
+  AddCurrencyButton = document.getElementById("add");
+  CurrencyAmount = document.getElementById("amount");
+
+  if (localStorage.getItem("loggedin") === "yes") {
+    // If User is Logged In Show Add Currency To Wallet Button.
+    AddCurrencyButton.classList.toggle("hidden");
+    CurrencyAmount.classList.toggle("hidden");
+  }
+});

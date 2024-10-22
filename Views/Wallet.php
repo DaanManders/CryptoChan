@@ -101,7 +101,9 @@
                     </td>
                     <!----- Currency Market Capacity | Currency Table ----->
                     <td class="currency-table-body-item fw-bolder pt-3 pb-3">
-                        <!--  -->
+                        <div class="delete-currency d-flex justify-content-center align-items-center" data-id="{{currencyID}}">
+                            <i class="fa-solid fa-trash"></i>
+                        </div>
                     </td>
                 </tr>
             {{/data}}

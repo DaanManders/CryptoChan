@@ -131,11 +131,10 @@
             {{/data}}
         </template>
     </div>
-    <!--  -->
+    <!----- Bootstrap Modal | Currency ----->
     <div class="modal fade" id="CurrencyInformation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered d-flex align-items-center justify-content-center">
             <div class="modal-content">
-                <!--  -->
                 <div class="modal-header d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <img class="currency-image me-2" width="20" height="20" style="display:none;">
@@ -144,7 +143,7 @@
                     </div>
                     <i class="close-modal-btn fa-solid fa-xmark"></i>
                 </div>
-                <!--  -->
+                <!----- Currency Details | Bootstrap Modal ----->
                 <div class="modal-body">
                     <div class="currency-details d-flex align-items-center justify-content-between">
                         <div class="currency-detail d-flex align-items-center p-3 me-3">
@@ -159,6 +158,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!----- Currency Detail | Bootstrap Modal ----->
                         <div class="currency-detail d-flex align-items-center p-3 me-3">
                             <div class="detail-image d-flex align-items-center justify-content-center me-3">
                                 <i class="fa-solid fa-shop"></i>
@@ -171,6 +171,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!----- Currency Detail | Bootstrap Modal ----->
                         <div class="currency-detail d-flex align-items-center ps-3 pt-3 pb-3">
                             <div class="detail-image d-flex align-items-center justify-content-center me-3">
                                 <i class="fa-solid fa-boxes-packing"></i>
@@ -185,6 +186,7 @@
                         </div>
                     </div>
                     <div class="currency-details mt-3">
+                        <!----- Currency Detail | Bootstrap Modal ----->
                         <div class="currency-detail large d-flex align-items-center ps-3 pt-3 pb-3">
                             <div class="detail-image d-flex align-items-center justify-content-center me-3">
                                 <i class="fa-solid fa-money-bill"></i>
@@ -198,9 +200,11 @@
                             </div>
                         </div>
                     </div>
+                    <!----- Chart.js Currency History | Bootstrap Modal ----->
                     <canvas class="graph mt-3 p-3 d-flex flex-column align-items-center" id="currency-history"></canvas>
                     <div class="d-flex align-items-center">
-                        <input class="currency-amount mt-3 me-2 outline-none p-3" type="number" id="amount">
+                        <!----- User Currency Interaction | Bootstrap Modal ----->
+                        <input class="currency-amount hidden mt-3 me-2 outline-none p-3" type="number" id="amount">
                         <button type="submit" class="add-to-wallet-btn hidden fw-bolder mt-3 border-0 p-3" id="add">
                             <i class="fa-solid fa-wallet me-2"></i>
                             Add to Wallet

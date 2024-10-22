@@ -184,4 +184,29 @@ if (isset($_GET['user_id'])) {
     getCurrenciesByUserId($userId);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_currency') {
+    // Get the currency ID from the request
+    $currencyID = $_POST['currency_id'];
+        $MySQLI = ConnectDatabase();
+
+    if (!empty($currencyID)) {
+        // Prepare the SQL delete statement (replace 'currencies' with your actual table name)
+        $stmt = $MySQLI->prepare("DELETE FROM currencies WHERE ID = ?");
+        $stmt->bind_param('i', $currencyID);
+
+        if ($stmt->execute()) {
+            // Success response
+            echo json_encode(['success' => true, 'message' => 'Currency deleted']);
+        } else {
+            // Error response
+            echo json_encode(['success' => false, 'message' => 'Failed to delete currency']);
+        }
+
+        $stmt->close();
+    } else {
+        // Invalid currency ID response
+        echo json_encode(['success' => false, 'message' => 'Invalid currency ID']);
+    }
+}
+
 ?>
