@@ -1,22 +1,26 @@
 function TogglePassword() {
+  // Assign Toggle Password Icon to JavaScript Variable & Click Event.
   document.getElementById("toggle").addEventListener("click", function () {
-    var Password = document.getElementById("Password"); // Assign Password Input.
-    var Icon = this; // Assign Icon.
+    var Password = document.getElementById("Password"); // Initialize Password Input Field.
+    var Icon = this; // Assign Toggle Icon.
 
     if (Icon.classList.contains("fa-eye")) {
-      Icon.classList.remove("fa-eye");
-      Icon.classList.add("fa-eye-slash");
-      Password.type = "text";
+      // If Password Toggle Icon contains Font Awesome Class.
+      Icon.classList.remove("fa-eye"); // Remove Font Awesome Class.
+      Icon.classList.add("fa-eye-slash"); // Add Font Awesome Class.
+      Password.type = "text"; // Change Input Field Type.
     } else {
-      Icon.classList.remove("fa-eye-slash");
-      Icon.classList.add("fa-eye");
-      Password.type = "password";
+      // If Password Toggle Icon contains Font Awesome Class.
+      Icon.classList.remove("fa-eye-slash"); // Remove Font Awesome Class.
+      Icon.classList.add("fa-eye"); // Add Font Awesome Class.
+      Password.type = "password"; // Change Input Field Type.
     }
   });
 }
 
 function NavigateToLogin() {
   window.location.href = "http://localhost/CryptoChan/Views/Login.php";
+  // Navigate to Register.php.
 }
 
 function CreateAccount() {
