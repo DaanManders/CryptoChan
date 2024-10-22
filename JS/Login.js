@@ -1,71 +1,86 @@
 function TogglePassword() {
+  // Assign Toggle Password Icon to JavaScript Variable & Click Event.
   document.getElementById("toggle").addEventListener("click", function () {
-    var Password = document.getElementById("Password"); // Assign Password Input.
-    var Icon = this; // Assign Icon.
+    var Password = document.getElementById("Password"); // Initialize Password Input Field.
+    var Icon = this; // Assign Toggle Icon.
 
     if (Icon.classList.contains("fa-eye")) {
-      Icon.classList.remove("fa-eye");
-      Icon.classList.add("fa-eye-slash");
-      Password.type = "text";
+      // If Password Toggle Icon contains Font Awesome Class.
+      Icon.classList.remove("fa-eye"); // Remove Font Awesome Class.
+      Icon.classList.add("fa-eye-slash"); // Add Font Awesome Class.
+      Password.type = "text"; // Change Input Field Type.
     } else {
-      Icon.classList.remove("fa-eye-slash");
-      Icon.classList.add("fa-eye");
-      Password.type = "password";
+      // If Password Toggle Icon contains Font Awesome Class.
+      Icon.classList.remove("fa-eye-slash"); // Remove Font Awesome Class.
+      Icon.classList.add("fa-eye"); // Add Font Awesome Class.
+      Password.type = "password"; // Change Input Field Type.
     }
   });
 }
 
 function NavigateToRegister() {
   window.location.href = "http://localhost/CryptoChan/Views/Register.php";
+  // Navigate to Register.php.
 }
 
 function Login() {
-  var Email = $("#Email").val(); // Email Field Value.
-  var Password = $("#Password").val(); // Password Field Value.
+  var Email = $("#Email").val(); // Assign Email Input Field Value to Variable.
+  var Password = $("#Password").val(); // Assign Password Input Field Value to Variable.
 
+  // If Either Input Field(s) are Empty.
   if (!Email || !Password) {
-    alert("All Fields are Required!"); // If Field(s) are Empty.
+    // Display Error in Localhost Alert.
+    alert("All Fields are Required!");
   } else {
+    // If Input Field(s) are Filled In.
     $.ajax({
-      type: "POST", // AJAX Request Type.
-      url: "../INC/Functions.php", // Link Functions File.
+      type: "POST", // POST Request.
+      url: "../INC/Functions.php", // Include Function.php with URL.
       data: {
-        action: "Login", // Add action for login
-        email: Email, // Email Credential.
-        password: Password, // Password Credential.
+        action: "Login", // Include Action.
+        email: Email, // Assign Email.
+        password: Password, // Assign Password.
       },
 
-      // AJAX Call Success.
+      // If AJAX Request is Successful.
       success: function (response) {
-        var data = JSON.parse(response); // Parse the JSON response
+        // Assign JSON Response to Variable.
+        var Data = JSON.parse(response);
 
-        if (data.status === "success") {
-          window.location.href = "Home.php";
-          localStorage.setItem("loggedin", "yes");
-          localStorage.setItem("user_id", data.user_id); // Store user_id
+        if (Data.status === "success") {
+          // If JSON Data Mentions Succesful Login.
+          window.location.href = "Home.php"; // Redirect to Home.
+
+          localStorage.setItem("loggedin", "yes"); // Fill LocalStorage with Boolean.
+          localStorage.setItem("user_id", Data.user_id); // Assign User ID.
         } else {
-          alert(response); // Handle any other responses, such as error messages
+          // If JSON Data Mentions Failed Login.
+          alert(response); // Alert Error in Localhost Alert.
           window.location.href = "Login.php";
+          // Redirect to Login.
         }
       },
 
-      // Execute Error Callback.
+      // If AJAX Request Failed.
       error: function (xhr, status, error) {
+        // Display Error in Localhost Alert.
         alert("An error occurred: " + error);
       },
     });
   }
 }
 
+// If Document is Fully Parsed & Loaded.
 $(document).ready(function () {
-  TogglePassword(); // Password Visibility.
+  // Make Toggle Password Function Constant.
+  TogglePassword();
 
-  $("#register").click(function () {
-    NavigateToRegister(); // Navigate to Register.
-  });
+  // If Register Link is Pressed.
+  $("#register").click(NavigateToRegister);
 
+  // If Login Button is Pressed.
   $("#login").click(function (event) {
-    event.preventDefault(); // Prevent Reloading the Page.
-    Login(); // Execute login function.
+    event.preventDefault(); // Prevent Refresh.
+    Login(); // Trigger Login.
   });
 });
