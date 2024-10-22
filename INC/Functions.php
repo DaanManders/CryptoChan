@@ -195,17 +195,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $stmt->bind_param('i', $currencyID);
 
         if ($stmt->execute()) {
-            // Success response
-            echo json_encode(['success' => true, 'message' => 'Currency deleted']);
+
         } else {
             // Error response
             echo json_encode(['success' => false, 'message' => 'Failed to delete currency']);
         }
 
         $stmt->close();
-    } else {
-        // Invalid currency ID response
-        echo json_encode(['success' => false, 'message' => 'Invalid currency ID']);
     }
 }
 
