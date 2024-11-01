@@ -83,7 +83,12 @@
                         </th>
                         <!----- Table Header | Currency Table ----->
                         <th class="currency-table-header-item fw-bolder pt-3 pb-3">
-                            <span>Price</span>
+                            <span>Price (USD)</span>
+                            <i class="filter fa-solid fa-caret-down ms-1"></i>
+                        </th>
+                        <!----- Table Header | Currency Table ----->
+                        <th class="currency-table-header-item fw-bolder pt-3 pb-3">
+                            <span>Price (EUR)</span>
                             <i class="filter fa-solid fa-caret-down ms-1"></i>
                         </th>
                         <!----- Table Header | Currency Table ----->
@@ -116,6 +121,11 @@
                     <td class="currency-table-body-item fw-bolder pt-3 pb-3">
                         <span class="dollar">$</span>
                         {{priceUsd}}
+                    </td>
+                    <!----- Currency Price USD | Currency Table ----->
+                    <td class="currency-table-body-item fw-bolder pt-3 pb-3">
+                        <span class="dollar">€</span>
+                        {{PriceEuro}}
                     </td>
                     <!----- Currency Trading Volume 24Hr | Currency Table ----->
                     <td class="currency-table-body-item fw-bolder pt-3 pb-3">

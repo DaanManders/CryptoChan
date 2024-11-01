@@ -16,9 +16,32 @@ function GetAllCurrencyData() {
         Currency.CoinImage = `https://assets.coincap.io/assets/icons/${Currency.symbol.toLowerCase()}@2x.png`;
       });
 
-      // Render Mustache Template with the Correct Array.
+      CryptoEuroAttribute(Currencies, Template);
+    },
+  });
+}
+
+function CryptoEuroAttribute(Currencies, Template) {
+  $.ajax({
+    type: "GET", // GET Request.
+    dataType: "json", // Return Data in JSON.
+    url: "https://api.coincap.io/v2/rates/euro", // API URL.
+
+    // If AJAX is Successful.
+    success: function (data) {
+      var RateUsd = parseFloat(data.data.rateUsd); // Get the Conversion Rate to USD and Parse it as a Float.
+
+      Currencies.forEach(function (Currency) {
+        var PriceUsd = parseFloat(Currency.priceUsd); // Convert the Price to a Float for Calculation.
+        var PriceEuro = (PriceUsd / RateUsd).toFixed(2); // Calculate Price in Euro and round to 2 Decimal.
+
+        // Add PriceEuro as a Property of each Currency Object.
+        Currency.PriceEuro = PriceEuro;
+      });
+
+      // Render the Mustache Template with the Currencies Array.
       var RenderTemplate = Mustache.render(Template, { data: Currencies });
-      $("#currency-table-body").html(RenderTemplate); // Render Template in Home.php.
+      $("#currency-table-body").html(RenderTemplate);
     },
   });
 }
