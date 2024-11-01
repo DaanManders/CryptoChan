@@ -37,9 +37,9 @@
         </div>
         <!----- CryptoChan Navigation Menu | Body Container ----->
         <div class="navigation-center d-flex justify-content-center align-items-center">
-            <a class="navigation-item text-decoration-none fw-bold" href="#">Home</a>
-            <a class="navigation-item text-decoration-none fw-bold" href="#">Community</a>
-            <a class="navigation-item text-decoration-none fw-bold" href="#">Products</a>
+            <a class="navigation-item text-decoration-none fw-bold" href="Home.php">Home</a>
+            <a class="navigation-item text-decoration-none fw-bold" href="Exchanges.php">Exchanges</a>
+            <a class="navigation-item text-decoration-none fw-bold" href="News.php">News</a>
             <a class="navigation-item text-decoration-none fw-bold" href="#">Learn</a>
         </div>
         <!----- CryptoChan Navigation Menu | Body Container ----->

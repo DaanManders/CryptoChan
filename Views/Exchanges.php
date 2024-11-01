@@ -6,7 +6,7 @@
     <!----- Bootstrap CDN Link | HTML Import ----->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!----- Link SCSS | HTML Import ----->
-    <link rel="stylesheet" href="../SCSS/Wallet.scss">
+    <link rel="stylesheet" href="../SCSS/Exchanges.scss">
     <!----- Link Google Fonts | HTML Import ----->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,15 +19,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!----- Link Mustache JS Template | HTML Import ----->
     <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
-    <script src="../JS/Wallet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../JS/Exchanges.js"></script>
     <!----- Website Icon | HTML Import ----->
     <link rel="icon" href="../SCSS/Images/Emote.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <title>Wallet</title>
+    <title>CryptoChan</title>
 </head>
 <body class="body-container w-100 h-100">
+    <!----- CryptoChan Navigation Menu | Body Container ----->
     <nav class="navigation-menu d-flex justify-content-between align-items-center">
         <div class="navigation-start d-flex justify-content-center align-items-center">
             <!----- CryptoChan Website Logo | Imported Image File Explorer ----->
@@ -36,7 +38,7 @@
         <!----- CryptoChan Navigation Menu | Body Container ----->
         <div class="navigation-center d-flex justify-content-center align-items-center">
             <a class="navigation-item text-decoration-none fw-bold" href="Home.php">Home</a>
-            <a class="navigation-item text-decoration-none fw-bold" href="Exchanges.php">Exchanges</a>
+            <a class="navigation-item text-decoration-none fw-bold" href="#">Exchanges</a>
             <a class="navigation-item text-decoration-none fw-bold" href="News.php">News</a>
             <a class="navigation-item text-decoration-none fw-bold" href="#">Learn</a>
         </div>
@@ -48,64 +50,22 @@
                 <i class="navigation-color fa-solid fa-chevron-down ms-3"></i>
             </div>
             <!----- Explore Wallet Button | Navigation Menu ----->
-            <button class="logout-btn border-0 fw-bolder ms-5" id="logout">Logout</button>
+            <button class="explore-wallet-btn border-0 fw-bolder ms-5">Explore Wallet</button>
         </div>
     </nav>
-    <div class="wallet-container mt-5">
-        <div class="table-wrapper">
-            <table class="currency-table">
-                <!----- Currency Table | Main Currency ----->
-                <thead class="curreny-table-header">
-                    <tr>
-                        <!----- Table Header | Currency Table ----->
-                        <th class="currency-table-header-item fw-bolder ps-5 pt-3 pb-3">
-                            <span>Name</span>
-                            <i class="filter fa-solid fa-caret-down ms-1"></i>
-                        </th>
-                        <!----- Table Header | Currency Table ----->
-                        <th class="currency-table-header-item fw-bolder pt-3 pb-3">
-                            <span>Amount</span>
-                            <i class="filter fa-solid fa-caret-down ms-1"></i>
-                        </th>
-                        <!----- Table Header | Currency Table ----->
-                        <th class="currency-table-header-item fw-bolder pt-3 pb-3">
-                            <span>Current Price</span>
-                            <i class="filter fa-solid fa-caret-down ms-1"></i>
-                        </th>
-                        <th class="currency-table-header-item fw-bolder pt-3 pb-3">
-                            <span>Actions</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="currency-wallet-body">
-                    <!----- Mustache JavaScript Template ----->
-                </tbody>
-            </table>
+    <!----- CryptoChan Main Container | Body Container ----->
+    <div class="main-container pb-5">
+        <div id="exchanges-wrapper">
+            <!----- Mustache JavaScript Template ----->
         </div>
-        <template id="wallet-currencies-template">
+
+        <template id="all-exchanges-template">
             {{#data}}
-                <tr class="currency-row" data-name="{{name}}" data-symbol="{{symbol}}" data-image="{{CoinImage}}" data-volume="{{volumeUsd24Hr}}" data-marketcap="{{marketCapUsd}}" data-supply="{{supply}}" data-price="{{priceUsd}}" data-id="{{id}}">
-                    <!----- Currency Name | Currency Table ----->
-                    <td class="currency-table-body-item fw-bolder ps-5 pt-3 pb-3">
-                        <img src="{{CoinImage}}" alt="{{symbol}} logo" width="15" height="15" class="me-2">
-                        {{currencyName}} <span class="symbol ms-1">{{currencySymbol}}</span>
-                    </td>
-                    <!----- Currency Price USD | Currency Table ----->
-                    <td class="currency-table-body-item fw-bolder pt-3 pb-3">
-                        {{currencyAmount}}
-                    </td>
-                    <!----- Currency Trading Volume 24Hr | Currency Table ----->
-                    <td class="currency-table-body-item fw-bolder pt-3 pb-3">
-                        <span class="dollar">$</span>
-                        {{currencyPrice}}
-                    </td>
-                    <!----- Currency Market Capacity | Currency Table ----->
-                    <td class="currency-table-body-item fw-bolder pt-3 pb-3">
-                        <div class="delete-currency d-flex justify-content-center align-items-center" data-id="{{currencyID}}">
-                            <i class="fa-solid fa-trash"></i>
-                        </div>
-                    </td>
-                </tr>
+                <div class="exchange-div d-flex flex-column align-items-start p-3 my-2">
+                    <h2 class="exchange-name m-0 mb-2">{{name}} ({{rank}})</h2>
+                    <h3 class="exchange-price m-0"><span class="dollar">$</span> {{volumeUsd}}</h3>
+                    <a href="{{exchangeUrl}}" class="exchange-url text-decoration-none m-0">{{exchangeUrl}}</a>
+                </div>
             {{/data}}
         </template>
     </div>
