@@ -6,7 +6,7 @@
     <!----- Bootstrap CDN Link | HTML Import ----->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!----- Link SCSS | HTML Import ----->
-    <link rel="stylesheet" href="../SCSS/Exchanges.scss">
+    <link rel="stylesheet" href="../SCSS/News.scss">
     <!----- Link Google Fonts | HTML Import ----->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
     <!----- Link Mustache JS Template | HTML Import ----->
     <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../JS/Exchanges.js"></script>
+    <script src="../JS/News.js"></script>
     <!----- Website Icon | HTML Import ----->
     <link rel="icon" href="../SCSS/Images/Emote.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -55,16 +55,20 @@
     </nav>
     <!----- CryptoChan Main Container | Body Container ----->
     <div class="main-container pb-5">
-        <div id="exchanges-wrapper">
-            <!----- Mustache JavaScript Template ----->
+        <div id="news-wrapper" class="d-flex flex-wrap items-center">
+            <!--  -->
         </div>
 
-        <template id="all-exchanges-template">
+        <template id="all-news-template">
             {{#data}}
-                <div class="exchange-div d-flex flex-column align-items-start p-3 my-2">
-                    <h2 class="exchange-name m-0 mb-2">{{name}} ({{rank}})</h2>
-                    <h3 class="exchange-price m-0"><span class="dollar">$</span> {{volumeUsd}}</h3>
-                    <a href="{{exchangeUrl}}" class="exchange-url text-decoration-none m-0">{{exchangeUrl}}</a>
+                <div class="article d-flex flex-column align-items-center p-4 m-4">
+                    <div class="image d-flex align-items-center justify-content-center">
+                        <img src="{{image_url}}" height="200" width="200">
+                    </div>
+                    <div class="heading pt-2">
+                        <h1 class="title">{{title}}</h1>
+                        <span class="date">{{pubDate}}</span>
+                    </div>
                 </div>
             {{/data}}
         </template>

@@ -1,0 +1,115 @@
+:root {
+  /* ===== Website Variables | CSS Variables ===== */
+  --website-gradient: linear-gradient(45deg, #d719b6, #371ad2);
+  --background-hyperlink: url("./Images/Background.jpg");
+  --font-family-tilt-warp: "Tilt Warp", sans-serif;
+  --font-family-lato: "Lato", sans-serif;
+  --button-background-color: #1d112c;
+  --website-transition: all 0.2s ease;
+  --table-background-color: #141126;
+  --navigation-item-color: #cfcfcf;
+  --table-border-color: #1d1a2e;
+  --background-color: #0a071d;
+  --text-color-white: #fff;
+  --primary-color: #d719b6;
+  --border-color: #4b4b4b;
+}
+
+::-webkit-scrollbar {
+  /* ===== Scrollbar Hide | HTML ===== */
+  height: 0;
+  width: 0;
+}
+
+.body-container {
+  /* ===== Body Container | Background Settings ===== */
+  background-image: var(--background-hyperlink);
+  background-color: var(--background-color);
+  font-family: var(--font-family-lato);
+  background-repeat: no-repeat;
+  -ms-overflow-style: none;
+  background-size: cover;
+
+  .navigation-menu {
+    /* ===== Navigation Menu | Body Container ===== */
+    padding: 0px 150px 0px 150px;
+    margin: 30px 0px 0px 0px;
+
+    .navigation-start {
+      /* ===== Navigation Menu | Left ===== */
+      .website-brandmark {
+        height: 75px;
+      }
+    }
+
+    .navigation-center {
+      /* ===== Navigation Menu | Middle ===== */
+      .navigation-item {
+        transition: var(--website-transition);
+        color: var(--navigation-item-color);
+        padding: 0px 20px 0px 20px;
+
+        &:hover {
+          /* ===== Navigation Menu | Hover ===== */
+          color: var(--text-color-white);
+        }
+      }
+    }
+
+    .navigation-end {
+      /* ===== Navigation Menu | End ===== */
+      .navigation-color {
+        color: var(--navigation-item-color);
+      }
+
+      .explore-wallet-btn {
+        /* ===== Explore Wallet | Button ===== */
+        transition: var(--website-transition);
+        background: var(--website-gradient);
+        color: var(--text-color-white);
+        border-radius: 10px;
+        font-size: 16px;
+        height: 50px;
+        width: 160px;
+      }
+    }
+  }
+
+  .main-container {
+    /* ===== Main Container | CryptoChan ===== */
+    padding: 50px 150px 50px 150px;
+    height: 100vh;
+
+    .article {
+      background-color: var(--table-background-color);
+      border: 3px solid var(--table-border-color);
+      border-radius: 10px;
+      height: 350px;
+      width: 250px;
+
+      .image {
+        background: var(--website-gradient);
+        color: var(--text-color-white);
+        border-radius: 10px;
+        font-size: 40px;
+        height: 200px;
+        width: 200px;
+      }
+
+      .heading {
+        .title {
+          color: var(--text-color-white);
+          font-size: 12px;
+          font-weight: 600;
+        }
+
+        .date {
+          color: var(--text-color-white);
+          font-size: 10px;
+          font-weight: 600;
+          opacity: 40%;
+        }
+      }
+    }
+  }
+}
